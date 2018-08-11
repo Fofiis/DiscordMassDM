@@ -1,4 +1,4 @@
 {
-  "token": "token",
-  "msg": "Mensagem do mass dm"
+  "tokens": ["seus", "tokens", "quantos você quiser!"],
+  "msg": "mensagem para ser enviada no mass dm"
 }
