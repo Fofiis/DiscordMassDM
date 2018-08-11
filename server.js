@@ -1,34 +1,22 @@
-var { Client } = require('discord.js')
-var Enmap = require("enmap")
-var db = new Enmap()
-var config = require("./config.json")
-var client = new Client()
-
-client.on('guildMemberAdd', membro => {
-  var guild = db.has(membro.guild.id)
-  if (guild) {
-    guild = db.get(membro.guild.id)
-  } else {
-    db.set(membro.guild.id, 0)
-    guild = db.get(membro.guild.id)
-  }
-  console.log(membro.user.tag +" entrou na guild "+ membro.guild.name +" hehe")
-  try {
-    membro.send(config.msg)
-    console.log("Sucesso, ele levou dm.")
-    guild++
-    db.set(membro.guild.id, guild)
-    console.log("Usuários que já receberam dm nessa guild: "+ guild)
-  } catch (e) {
-    console.log("Deu erro, provavelmente estava com a dm desativada.")
-    console.log("Usuários que já receberam dm nessa guild: "+ guild)
-  }
+var { tokens } = require('./config.json')
+var Listeners = require('./src/Listeners')
+var ola = new Listeners()
+Array.prototype.search = function (elemento) {
+  var array = this
+  array.forEach((ele, i) => {
+    if (ele == elemento) return i
+    else if (parseInt(i) + 1 == array.length) return undefined
+  });
+}
+var instancias = []
+var x = 0
+if (tokens.length == 0) console.log("Nenhum token foi inserido. Saindo"), process.exit()
+tokens.forEach(token => {
+  x++
+  var { Client } = require('discord.js')
+  var bot = new Client()
+  bot.n = x
+  ola.declare(bot)
+  bot.login(token)
+  instancias.push(bot)
 });
-client.on('ready', () => console.log("Bot ligado."))
-client.on('guildCreate', (g) => {
-  console.log("Entrei na guild "+ g.name +"!")
-});
-client.on('guildDelete', (g) => {
-  console.log("Sai da guild "+ g.name +" #rip")
-});
-client.login(config.token)
