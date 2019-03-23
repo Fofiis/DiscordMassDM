@@ -1,5 +1,5 @@
 # Mass DMer for Discord
-
+# Copied by Me for BackUP
 
 ## :warning: Antes de ler, se você vir falar "ain você tá incentivando selfbot", vá pra puta que pariu. Esse projeto é para fins educativos, não me responsabilizo pelo o que os outros fazem com este projeto. :warning:
 
